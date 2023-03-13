@@ -1,5 +1,5 @@
-# UserLAnd-Assets-Support
-A repository for holding assets used by all distros/apps for UserLAnd
+# Andronix-Auto-Assets-Support
+A repository for holding assets used by all distros/apps for Andronix-Auto
 
 After cloning this repo, you simply do the following...
 

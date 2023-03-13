@@ -11,27 +11,27 @@ if [[ -z "${OS_VERSION}" ]]; then
 fi
 
 if [[ ! -r /dev/ashmem ]] ; then
-	EXTRA_BINDINGS="$EXTRA_BINDINGS -b $ROOTFS_PATH/tmp:/dev/ashmem" 
+	EXTRA_BINDINGS="$EXTRA_BINDINGS -b $ROOTFS_PATH/tmp:/dev/ashmem"
 fi
 if [[ ! -r /dev/shm ]] ; then
-	EXTRA_BINDINGS="$EXTRA_BINDINGS -b $ROOTFS_PATH/tmp:/dev/shm" 
+	EXTRA_BINDINGS="$EXTRA_BINDINGS -b $ROOTFS_PATH/tmp:/dev/shm"
 fi
 if [[ ! -r /proc/stat ]] ; then
 	numProc="$($LIB_PATH/busybox grep rocessor /proc/cpuinfo)"
 	numProc="${numProc: -1}"
 	if [[ "$numProc" -le "3" ]] 2>/dev/null ; then
-		EXTRA_BINDINGS="$EXTRA_BINDINGS -b $ROOT_PATH/support/stat4:/proc/stat" 
+		EXTRA_BINDINGS="$EXTRA_BINDINGS -b $ROOT_PATH/support/stat4:/proc/stat"
 	else
-		EXTRA_BINDINGS="$EXTRA_BINDINGS -b $ROOT_PATH/support/stat8:/proc/stat" 
+		EXTRA_BINDINGS="$EXTRA_BINDINGS -b $ROOT_PATH/support/stat8:/proc/stat"
 	fi
 fi
 if [[ ! -r /proc/uptime ]] ; then
-	EXTRA_BINDINGS="$EXTRA_BINDINGS -b $ROOT_PATH/support/uptime:/proc/uptime" 
+	EXTRA_BINDINGS="$EXTRA_BINDINGS -b $ROOT_PATH/support/uptime:/proc/uptime"
 fi
 if [[ ! -r /proc/version ]] ; then
 	currDate="$($LIB_PATH/busybox date)"
-	echo "Linux version $OS_VERSION (fake@userland) #1 $currDate" > $ROOT_PATH/support/version
-	EXTRA_BINDINGS="$EXTRA_BINDINGS -b $ROOT_PATH/support/version:/proc/version" 
+	echo "Linux version $OS_VERSION (fake@andronix) #1 $currDate" > $ROOT_PATH/support/version
+	EXTRA_BINDINGS="$EXTRA_BINDINGS -b $ROOT_PATH/support/version:/proc/version"
 fi
 
 #save what proot version we are using, so we cannot mess this up later
@@ -54,4 +54,4 @@ PROOT="$LIB_PATH/proot$PROOT_VER"
 
 #launch PRoot
 unset LD_PRELOAD
-PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin PROOT_TMP_DIR=$ROOTFS_PATH/support/ PROOT_LOADER=$LIB_PATH/loader PROOT_LOADER_32=$LIB_PATH/loader32 $PROOT -r $ROOTFS_PATH -v $PROOT_DEBUG_LEVEL -p --sysvipc -H -0 -l -L -b /sys -b /dev -b /proc -b /data -b /mnt -b /proc/mounts:/etc/mtab -b /:/host-rootfs -b $ROOTFS_PATH/support/:/support -b $ROOTFS_PATH/support/nosudo:/usr/local/bin/sudo -b $ROOTFS_PATH/support/userland_profile.sh:/etc/profile.d/userland_profile.sh -b $ROOTFS_PATH/support/ld.so.preload:/etc/ld.so.preload -b $ROOT_PATH/support:/support/common $EXTRA_BINDINGS $@
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin PROOT_TMP_DIR=$ROOTFS_PATH/support/ PROOT_LOADER=$LIB_PATH/loader PROOT_LOADER_32=$LIB_PATH/loader32 $PROOT -r $ROOTFS_PATH -v $PROOT_DEBUG_LEVEL -p --sysvipc -H -0 -l -L -b /sys -b /dev -b /proc -b /data -b /mnt -b /proc/mounts:/etc/mtab -b /:/host-rootfs -b $ROOTFS_PATH/support/:/support -b $ROOTFS_PATH/support/nosudo:/usr/local/bin/sudo -b $ROOTFS_PATH/support/andronix_profile.sh:/etc/profile.d/andronix_profile.sh -b $ROOTFS_PATH/support/ld.so.preload:/etc/ld.so.preload -b $ROOT_PATH/support:/support/common $EXTRA_BINDINGS $@

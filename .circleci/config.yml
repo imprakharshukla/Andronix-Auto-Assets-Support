@@ -8,7 +8,7 @@ jobs:
   build_arm:
     machine: true
 
-    working_directory: ~/UserLAnd-Assets-Support
+    working_directory: ~/Andronix-Auto-Assets-Support
 
     steps:
       - checkout
@@ -18,12 +18,12 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - output/*    
+            - output/*
 
   build_arm64:
     machine: true
 
-    working_directory: ~/UserLAnd-Assets-Support
+    working_directory: ~/Andronix-Auto-Assets-Support
 
     steps:
       - checkout
@@ -33,12 +33,12 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - output/*    
+            - output/*
 
   build_x86:
     machine: true
 
-    working_directory: ~/UserLAnd-Assets-Support
+    working_directory: ~/Andronix-Auto-Assets-Support
 
     steps:
       - checkout
@@ -48,12 +48,12 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - output/*    
+            - output/*
 
   build_x86_64:
     machine: true
 
-    working_directory: ~/UserLAnd-Assets-Support
+    working_directory: ~/Andronix-Auto-Assets-Support
 
     steps:
       - checkout
@@ -63,12 +63,12 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - output/*    
+            - output/*
 
   publish-github-release:
     docker:
       - image: circleci/golang:1.12
-      
+
     steps:
       - attach_workspace:
           at: .
@@ -84,7 +84,7 @@ jobs:
     docker:
       - image: circleci/golang:1.12
 
-    working_directory: ~/UserLAnd-Assets-Support
+    working_directory: ~/Andronix-Auto-Assets-Support
 
     steps:
       - attach_workspace:
@@ -115,7 +115,7 @@ jobs:
             git add -A
             git commit --allow-empty -m "Auto-build ${VERSION}"
             # Push quietly to prevent showing the token in log
-            git push --force -q https://${GITHUB_TOKEN}@github.com/CypherpunkArmory/UserLAnd-Assets-Support.git auto-build
+            git push --force -q https://${GITHUB_TOKEN}@github.com/imprakharshukla/Andronix-Auto-Assets-Support.git auto-build
 
 workflows:
   version: 2

@@ -54,7 +54,6 @@ if [ ! -d $TERMUX_PACKAGES_DIR ]
 then
     git clone https://github.com/termux/termux-packages.git $TERMUX_PACKAGES_DIR
     cd $TERMUX_PACKAGES_DIR
-    #git checkout -b userland 7f9d1ad9243cdcc0d477f8495091fe2bb9444569
     git fetch
     git checkout android-5
     scripts/setup-ubuntu.sh

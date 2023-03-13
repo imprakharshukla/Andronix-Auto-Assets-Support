@@ -10,7 +10,7 @@ if [ ! -f /usr/bin/startlxde ]; then
       read -rsp $'An error occurred installing packages, please try again and if it persists provide this log to the developer.\nPress any key to close...\n' -n1 key
       exit
    fi
-fi 
+fi
 
 if grep -q "^/usr/bin/startlxde" ~/.vnc/xstartup; then
    echo "xstartup already setup"
@@ -33,7 +33,7 @@ if [[ -n "$DE_CHANGED" ]]; then
 	   RED='\033[0;31m'
 	   BLUE='\033[0;34m'
 	   echo -e "${BLUE}You are requesting a new desktop environment a restart is required."
-	   echo -e "${RED}Stop and then restart the app in UserLAnd."
+	   echo -e "${RED}Stop and then restart the app in Andronix."
 	   sleep 5
    done
 fi
